@@ -2,7 +2,6 @@
 import { Routes, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-
 // Components
 import ServiceList from "./components/service/ServiceList";
 import NavBar from "./components/partials/NavBar";
@@ -12,10 +11,10 @@ import SigninForm from './components/auth/SignInForm';
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
 
-  const handleSignout = () => {
-    authService.signout();
-    setUser(null);
-  }
+  // const handleSignout = () => {
+  //   authService.signout();
+  //   setUser(null);
+  // }
 
   return (
     <>
