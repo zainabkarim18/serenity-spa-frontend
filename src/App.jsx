@@ -16,10 +16,10 @@ import Footer from './components/partials/Footer';
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
 
-  // const handleSignout = () => {
-  //   authService.signout();
-  //   setUser(null);
-  // }
+  const handleSignout = () => {
+    authService.signout();
+    setUser(null);
+  }
 
   return (
     <div id="root">
@@ -40,8 +40,10 @@ const App = () => {
         
         <Routes>
           <Route path="/services" element={<ServiceList />} />
+          <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
+          
         </Routes>
       </main>
 
