@@ -1,9 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
-import authService from './services/authService';
+
+// import * as serviceService from './services/serviceService';
+import { Routes, Route} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useState} from 'react';
+import authService from './services/authService'
 
 // Components
 import ServiceList from "./components/service/ServiceList";
+import ServiceDetail from "./components/service/ServiceDetail";
 import NavBar from "./components/partials/NavBar";
 import SignupForm from './components/auth/SignUpForm';
 import SigninForm from './components/auth/SignInForm';
@@ -12,10 +16,10 @@ import Footer from './components/partials/Footer';
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
 
-  const handleSignout = () => {
-    authService.signout();
-    setUser(null);
-  }
+  // const handleSignout = () => {
+  //   authService.signout();
+  //   setUser(null);
+  // }
 
   return (
     <div id="root">
@@ -42,6 +46,7 @@ const App = () => {
       </main>
 
     </div>
+
   );
 };
 
