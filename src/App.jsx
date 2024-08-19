@@ -1,3 +1,12 @@
+// import * as serviceService from './services/serviceService';
+import { Routes, Route} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
+// Components
+import ServiceList from "./components/service/ServiceList";
+
+
 const App = () => {
   return (
     <>
@@ -10,6 +19,12 @@ const App = () => {
         <br /><br /><br />
         <a className="appoint-button" href="services.html">Make an Appointment</a>
       </div>
+
+      <Routes>
+        <Route path="/services" element={<ServiceList />} />
+      </Routes>
+
+<Link to="/services" >Services </Link>
     </>
   );
 };
