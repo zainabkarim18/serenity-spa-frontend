@@ -1,14 +1,13 @@
 // import * as serviceService from './services/serviceService';
 import { Routes, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-=======
+
 import { useState} from 'react';
 import authService from './services/authService'
->>>>>>> origin/main
 
 // Components
 import ServiceList from "./components/service/ServiceList";
+import ServiceDetail from "./components/service/ServiceDetail";
 import NavBar from "./components/partials/NavBar";
 import SignupForm from './components/auth/SignUpForm';
 import SigninForm from './components/auth/SignInForm';
@@ -35,6 +34,7 @@ const App = () => {
 
       <Routes>
         <Route path="/services" element={<ServiceList />} />
+        <Route path="/services/:id" element={<ServiceDetail />} />
         <Route path="/NavBar" element={< NavBar/>} />
         <Route path="/signup" element={<SignupForm setUser={setUser} />} />
         <Route path="/signin" element={<SigninForm setUser={setUser} />} />
