@@ -1,8 +1,6 @@
-// import * as serviceService from './services/serviceService';
-import { Routes, Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useState} from 'react';
-import authService from './services/authService'
+import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import authService from './services/authService';
 
 // Components
 import ServiceList from "./components/service/ServiceList";
@@ -20,6 +18,8 @@ const App = () => {
 
   return (
     <>
+      <NavBar user={user} handleSignout={handleSignout} />
+
       <div className="home-content">
         <h4>Hello, welcome to</h4>
         <h1 className="glowing-title">
@@ -32,15 +32,9 @@ const App = () => {
 
       <Routes>
         <Route path="/services" element={<ServiceList />} />
-        <Route path="/NavBar" element={< NavBar/>} />
         <Route path="/signup" element={<SignupForm setUser={setUser} />} />
         <Route path="/signin" element={<SigninForm setUser={setUser} />} />
       </Routes>
-
-<Link to="/services" >Services </Link>
-<Link to="/signup" >Sign up</Link>
-<Link to="/signin" >Sign In </Link>
-
     </>
   );
 };
