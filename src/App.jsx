@@ -1,6 +1,11 @@
 // import * as serviceService from './services/serviceService';
 import { Routes, Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import { useState} from 'react';
+import authService from './services/authService'
+>>>>>>> origin/main
 
 // Components
 import ServiceList from "./components/service/ServiceList";
