@@ -1,6 +1,8 @@
+
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import authService from './services/authService';
+
 
 // Components
 import ServiceList from "./components/service/ServiceList";
@@ -20,6 +22,7 @@ const App = () => {
     setUser(null);
   };
 
+
   const isHomePage = location.pathname === '/';
 
   return (
@@ -31,15 +34,19 @@ const App = () => {
         <div className="home-content">
           <h4>Hello, welcome to</h4>
           <h1 className="glowing-title">
+
             Serenity <span>Spa</span>
           </h1>
-          <h3>Where you will feel most Beautiful</h3>
-          <br /><br /><br />
-          <a className="appoint-button" href="/services">Make an Appointment</a>
+          <h3 className="mb-4">Where you will feel most Beautiful</h3>
+          <Link className="btn btn-primary btn-lg" to="/services">
+            Make an Appointment
+          </Link>
         </div>
+
       )}
 
       <main className={location.pathname === '/signup' || location.pathname === '/signin' ? 'form-page-wrapper' : 'main-content'}>
+
         <Routes>
           <Route path="/services" element={<ServiceList />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
@@ -48,6 +55,7 @@ const App = () => {
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
         </Routes>
       </main>
+
 
       <Footer />
     </div>
