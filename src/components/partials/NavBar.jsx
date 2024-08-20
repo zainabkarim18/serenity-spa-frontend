@@ -6,9 +6,10 @@ const NavBar = ({ user, handleSignout }) => {
       <div className="logo">Serenity Spa</div>
       <ul className="nav-center">
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/services">Services</Link></li>
         {user && (
           <>
-            <li><Link to="/services">Services</Link></li>
+            <li><Link to="/services/add" >Add Services </Link></li>
             <li><Link to="/bookings">Bookings</Link></li>
           </>
         )}

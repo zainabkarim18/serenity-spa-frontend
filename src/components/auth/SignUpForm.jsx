@@ -1,11 +1,10 @@
-import authService from '../../services/authService'
-
+import authService from '../../services/authService';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const SignupForm = (props) => {
   const navigate = useNavigate();
-  const [message, setMessage] = useState(['']);
+  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -25,9 +24,8 @@ const SignupForm = (props) => {
     e.preventDefault();
     try {
       updateMessage('');
-      console.log(authService)
-      const newUserResponse = await authService.signup(formData)
-      props.setUser(newUserResponse.user)
+      const newUserResponse = await authService.signup(formData);
+      props.setUser(newUserResponse.user);
       navigate('/');
     } catch (err) {
       updateMessage(err.message);
@@ -41,61 +39,65 @@ const SignupForm = (props) => {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
-      <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="name"
-            value={username}
-            name="username"
-            onChange={handleChange}
-          />
+    <div className="form-page-wrapper">
+      <main className="form-container">
+        <div className="form-header">
+          <h2>Sign Up</h2>
         </div>
+        <p>{message}</p>
+        <form className="form-content" onSubmit={handleSubmit}>
+          <div className="form-control">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              name="username"
+              onChange={handleChange}
+            />
+          </div>
 
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            name="email"
-            onChange={handleChange}
-          />
-        </div>
+          <div className="form-control">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              name="email"
+              onChange={handleChange}
+            />
+          </div>
 
-        <div>
-          <label htmlFor="username">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            name="password"
-            onChange={handleChange}
-          />
-        </div>
-        
-        <div>
-          <label htmlFor="confirm">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirm"
-            value={passwordConf}
-            name="passwordConf"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <Link to="/">
-            <button>Cancel</button>
-          </Link>
-        </div>
-      </form>
-    </main>
+          <div className="form-control">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              name="password"
+              onChange={handleChange}
+            />
+          </div>
+          
+          <div className="form-control">
+            <label htmlFor="passwordConf">Confirm Password:</label>
+            <input
+              type="password"
+              id="passwordConf"
+              value={passwordConf}
+              name="passwordConf"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <button disabled={isFormInvalid()}>Sign Up</button>
+            <Link to="/">
+              <button type="button">Cancel</button>
+            </Link>
+          </div>
+        </form>
+      </main>
+    </div>
   );
 };
 
