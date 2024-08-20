@@ -96,7 +96,7 @@ const Reviews = ({ serviceId }) => {
         <article key={review._id}>
           <p>
             <strong>
-              {review.user.username} posted on {review.createdAt}
+            {review.user.username} posted on {new Date(review.createdAt).toLocaleDateString()}
             </strong>
           </p>
           <p>{review.comment}</p>
