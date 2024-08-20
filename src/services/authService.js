@@ -37,6 +37,7 @@ const signup = async (formData) => {
   }
 };
 
+
 const signin = async (user) => {
   try {
     const res = await fetch(`${BACKEND_URL}/users/signin`, {
@@ -53,19 +54,26 @@ const signin = async (user) => {
 
     if (json.token) {
       // Save it to local storage
+      console.log("Token received:", json.token);
       window.localStorage.setItem('token', json.token);
 
+      // Decode payload
       const rawPayload = json.token.split('.')[1];
       const jsonPayload = window.atob(rawPayload);
 
       const user = JSON.parse(jsonPayload);
+      console.log("Decoded user from token:", user);
+
       return user;
+    } else {
+      throw new Error('No token received from backend');
     }
   } catch (err) {
-    console.error(err);
+    console.error("Sign-in failed:", err);
     throw err;
   }
 };
+
 
 export default {
   signup,
