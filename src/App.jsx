@@ -9,6 +9,8 @@ import ServiceForm from "./components/service/ServiceForm";
 import NavBar from "./components/partials/NavBar";
 import SignupForm from './components/auth/SignUpForm';
 import SigninForm from './components/auth/SignInForm';
+import BookingList from "./components/booking/BookingList"; 
+import BookingDetails from "./components/booking/BookingDetail";
 import Footer from './components/partials/Footer';
 
 const App = () => {
@@ -46,6 +48,8 @@ const App = () => {
           <Route path="/services/add" element={<ServiceForm />} />
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
+          <Route path="/bookings" element={<BookingList />} />
+          <Route path="/bookings/:id" element={<BookingDetails />} />
         </Routes>
       </main>
 
