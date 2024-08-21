@@ -43,7 +43,7 @@ const ServiceDetail = () => {
           Image: <img src={service.image} alt={service.name} />
         </p>
       )}
-      <Link to={`/services/edit`}>
+      <Link to={`/services/${service._id}/edit`}>
         <button>Edit Service</button>
       </Link>
       <button onClick={handleDelete}>Delete Service</button>
