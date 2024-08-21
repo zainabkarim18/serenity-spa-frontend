@@ -34,19 +34,19 @@ const ServiceDetail = () => {
 
   return (
     <div>
-      <img src={props.image} alt={props.name} />
-      <h1>{props.name}</h1>
-      <h2>Description: {props.description}</h2>
-      <h2>Duration: {props.duration}</h2>
-      <h2>
-        Price: {props.price}
-        {props.price > 1 ? "BD" : ""}
-      </h2> 
-      <button  onClick={()=>editService()}>Edit Service</button>
-      <button  onClick={() => props.handleDeleteService(props._id)}> Delete Service</button>
-    
-      
-      <Reviews serviceId={props._id} /> 
+      <h1>{service.name}</h1>
+      <p>Description: {service.description}</p>
+      <p>Duration: {service.duration}</p>
+      <p>Price: {service.price}</p>
+      {service.image && (
+        <p>
+          Image: <img src={service.image} alt={service.name} />
+        </p>
+      )}
+      <Link to={`/services/edit`}>
+        <button>Edit Service</button>
+      </Link>
+      <button onClick={handleDelete}>Delete Service</button>
     </div>
   );
 };
