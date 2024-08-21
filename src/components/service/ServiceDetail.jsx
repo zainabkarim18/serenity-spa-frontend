@@ -1,3 +1,4 @@
+import Reviews from "../review/reviewSection";
 export default function ServiceDetail (props) {
 
   const editService =()=>{
@@ -9,9 +10,8 @@ export default function ServiceDetail (props) {
 
   return (
     <div>
-
-
-      <h1>Name: {props.name}</h1>
+      <img src={props.image} alt={props.name} />
+      <h1>{props.name}</h1>
       <h2>Description: {props.description}</h2>
       <h2>Duration: {props.duration}</h2>
       <h2>
@@ -22,8 +22,7 @@ export default function ServiceDetail (props) {
       <button  onClick={() => props.handleDeleteService(props._id)}> Delete Service</button>
     
       
-      {/* <Reviews serviceId={id} />  */}
+      {/* <Reviews serviceId={props._id} />  */}
     </div>
   );
 };
-
