@@ -4,6 +4,8 @@ html, body {
   padding: 0;
   height: 100%;
   box-sizing: border-box;
+  font-family: "Josefin Slab", serif;
+  font-weight: 700;
 }
 
 .app-container {
@@ -15,7 +17,7 @@ html, body {
 /* Main Content */
 .main-content {
   flex: 1;
-  padding: 50px; 
+  padding: 20px; 
 
 }
 
