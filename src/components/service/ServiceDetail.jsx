@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import * as serviceService from "../../services/serviceService";
-import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import authService from "../../services/authService";
 import BookingForm from '../booking/BookingForm';
+import Reviews from "../review/reviewSection";
 
 const ServiceDetail = (props) => {
   const { id } = useParams();
