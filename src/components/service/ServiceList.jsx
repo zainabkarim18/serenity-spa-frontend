@@ -18,20 +18,30 @@ const ServiceList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Service List</h1>
-      <Link to="/services/new">
-        <button>Add Service</button>
-      </Link>
-      <ul>
+    <div className="service">
+      <div className="add-service-button-container">
+        <Link to="/services/new">
+        <button className="add-service-button">Add Service</button>
+        </Link>
+    </div>
+      <div className="title">
+        <h2>Our Services</h2>
+      </div>
+      
+      <div className="box">
         {services.map((service) => (
-          <li key={service._id}>
-            <Link to={`/services/${service._id}`}>
-              <h2>{service.name}</h2>
-            </Link>
-          </li>
+          <div className="card" key={service._id}>
+            <br />
+            <img src={service.image} alt={service.name} /><br /><br />
+            <h5>{service.name}</h5><br />
+            <div className="pra">
+              <p style={{ textAlign: "center" }}>
+                <Link to={`/services/${service._id}`} className="booking-button">More</Link>
+              </p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
