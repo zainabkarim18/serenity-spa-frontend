@@ -16,7 +16,7 @@ html, body {
 .main-content {
   flex: 1;
   padding: 50px; 
-  height: 650px;
+
 }
 
 /* Background Wrapper (for home page) */
@@ -290,4 +290,33 @@ form button[type="button"] {
 
 form button[type="button"]:hover {
   background-color: #f7f7f7;
+}
+
+.btn {
+  background-color: #D66171;
+  color: white;
+}
+
+.btn:hover {
+  background-color: transparent;
+  color: #D66171;
+  border: 2px solid #D66171;
+  transition: ease-in;
+}
+
+.link {
+  color: #4f2a2f;
+  text-decoration: none;
+}
+.link:hover {
+font-weight: bold;
+  color: #2f2022;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #7c4048;
+}
+
+label {
+  color: #722e37;
 }
