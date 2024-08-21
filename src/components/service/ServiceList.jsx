@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import * as serviceService from "../../services/serviceService";
 
 const ServiceList = () => {
@@ -20,6 +20,9 @@ const ServiceList = () => {
   return (
     <div>
       <h1>Service List</h1>
+      <Link to="/services/add">
+        <button>Add Service</button>
+      </Link>
       <ul>
         {services.map((service) => (
           <li key={service._id}>
