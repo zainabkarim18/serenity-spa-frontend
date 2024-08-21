@@ -13,6 +13,8 @@ import SigninForm from './components/auth/SignInForm';
 import BookingList from "./components/booking/BookingList"; 
 import BookingDetails from "./components/booking/BookingDetail";
 import Footer from './components/partials/Footer';
+import ProfileDetail from './components/profile/ProfileDetail';
+import ProfileForm from './components/profile/ProfileForm';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
@@ -49,8 +51,13 @@ const App = () => {
           <Route path="/services/add" element={<ServiceEditForm />} />
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
+
+          <Route path="/profile" element={<ProfileDetail />} />
+          <Route path="/edit-profile" element={<ProfileForm user={user} setUser={setUser} />} />
+
           <Route path="/bookings" element={<BookingList />} />
           <Route path="/bookings/:id" element={<BookingDetails />} />
+
         </Routes>
       </main>
 
