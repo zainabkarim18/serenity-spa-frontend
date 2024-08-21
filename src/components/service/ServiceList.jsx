@@ -1,9 +1,7 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as serviceService from "../../services/serviceService";
-import ServiceEditForm from "../service/ServiceEditForm";
-import ServiceDetail from "../service/ServiceDetail";
-import ServiceForm from "./ServiceForm";
 
 const ServiceList = () => {
   const [serviceList, setServiceList] = useState([]);
@@ -21,6 +19,17 @@ const ServiceList = () => {
       const services = await serviceService.index();
       if (services.error) {
         throw new Error(services.error);
+// =======
+//   const [services, setServices] = useState([]);
+
+//   useEffect(() => {
+//     const fetchServices = async () => {
+//       try {
+//         const serviceData = await serviceService.index();
+//         setServices(serviceData);
+//       } catch (error) {
+//         console.error("Error fetching services:", error);
+// >>>>>>> main
       }
       setServiceList(services);
       console.log(services);
@@ -72,6 +81,23 @@ const ServiceList = () => {
           {services}
         </div>
       </div>
+// =======
+//   return (
+//     <div>
+//       <h1>Service List</h1>
+//       <Link to="/services/add">
+//         <button>Add Service</button>
+//       </Link>
+//       <ul>
+//         {services.map((service) => (
+//           <li key={service._id}>
+//             <Link to={`/services/${service._id}`}>
+//               <h2>{service.name}</h2>
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+// >>>>>>> main
     </div>
   );
 };

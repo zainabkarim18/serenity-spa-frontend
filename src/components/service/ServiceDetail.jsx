@@ -1,12 +1,36 @@
-import Reviews from "../review/reviewSection";
-export default function ServiceDetail (props) {
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import * as serviceService from "../../services/serviceService";
 
-  const editService =()=>{
-    props.setIsEdit();
-    props.setServiceToEdit(props._id)
+const ServiceDetail = () => {
+  const { id } = useParams();
+  const [service, setService] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchServiceDetail = async () => {
+      try {
+        const serviceData = await serviceService.detail(id);
+        setService(serviceData);
+      } catch (error) {
+        console.error("Error fetching service details:", error);
+      }
+    };
+    fetchServiceDetail();
+  }, [id]);
+
+  const handleDelete = async () => {
+    try {
+      await serviceService.remove(id);
+      navigate("/services");
+    } catch (error) {
+      console.error("Error deleting service:", error);
     }
+  };
 
-  
+  if (!service) {
+    return <p>Loading service details...</p>;
+  }
 
   return (
     <div>
@@ -26,3 +50,5 @@ export default function ServiceDetail (props) {
     </div>
   );
 };
+
+export default ServiceDetail;
