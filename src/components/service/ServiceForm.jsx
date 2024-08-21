@@ -40,23 +40,7 @@ const ServiceForm = () => {
     }
   };
 
-// const handleUpdateService = async (formData) => {
-//     try {
-//       const updatedService = await serviceService.update(formData, id);
-//       if (!updatedService.error) {
-//         throw new Error(updatedService);
-//       };
-//       const updatedServices = services.map((res) => (
-//         res._id !== updatedService._id ? res: updatedService
-//       ));
-//       newServices(updatedServices);
-//     } catch (error) {
-//       console.log(error);
-//     };
-//   };
-
-
-   const handleSubmit = async (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     await handleAddService(formData);
   };

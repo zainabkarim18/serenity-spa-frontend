@@ -17,8 +17,6 @@ const ServiceEditForm = (props) => {
     getService();
   }, []);
 
-  // const [services,newServices] = useState([]);
-
  const navigate = useNavigate();
 
   const handleChange = (evt) => {
@@ -35,10 +33,7 @@ const handleUpdateService = async (formData) => {
       if (!updatedService) {
         throw new Error(updatedService);
       };
-      // const updatedServices = services.map((res) => (
-      //   res._id !== updatedService._id ? res: updatedService
-      // ));
-      // newServices(updatedServices);
+  
       props.setIsEdit();
     } catch (error) {
       console.log(error);
