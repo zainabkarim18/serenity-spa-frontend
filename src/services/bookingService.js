@@ -49,9 +49,13 @@ const remove = async (bookingId) => {
     }
   };
 
-const create = async (bookingId,UserId) =>{
+const create = async (formData) =>{
   console.log("formdata", formData);
-
+  const data = JSON.stringify(formData)
+  const userId = data.user;
+  const serviceId = data.service; 
+  console.log("user:",userId,"service:",serviceId);
+  
   try {
     await fetch(`${BASE_URL}/`, {
       method: 'POST',
@@ -63,12 +67,12 @@ const create = async (bookingId,UserId) =>{
     })
     // console.log(options);
 
-    const res = await fetch(`${BASE_URL}/${userId}/${serviceId}`)
-    console.log("res", res);
+    // const res = await fetch(`${BASE_URL}/${userId}/${serviceId}`)
+    // console.log("res", res);
 
-    return res.json()
+    // return res.json()
   } catch (err) {
-    console.log(err)
+    console.log("error in bookig service create",err)
   }
 };
 

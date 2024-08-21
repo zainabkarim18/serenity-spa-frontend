@@ -6,7 +6,7 @@ const BookingForm = ({userId,serviceId}) => {
   const [service, setService] = useState([]);
   const [formData, setFormData] = useState({
     user: '',
-    // service: '',
+    service: '',
     date: '',
     time: '',
     status: 'Pending', // Default status
@@ -35,7 +35,7 @@ const BookingForm = ({userId,serviceId}) => {
 
 const handleAddBooking = async (formData) => {
     try {
-      const newBooking = await serviceService.create(formData);
+      const newBooking = await serviceBooking.create(formData);
       if (!newBooking) {
         throw new Error(newBooking);
       }
@@ -45,7 +45,7 @@ const handleAddBooking = async (formData) => {
       
       setIsFormOpen(false);
     } catch (err) {
-      console.log(err);
+      console.log("error in booking form",err);
     }
   };
 
@@ -76,6 +76,8 @@ const handleAddBooking = async (formData) => {
 
   const handleSubmit = async (evt) => {
     e.preventDefault();
+    setFormData({ ...formData, user: userId });
+    setFormData({ ...formData, service: serviceId });
     await handleAddBooking(formData);
     
     // try {
@@ -96,7 +98,7 @@ const handleAddBooking = async (formData) => {
 
   return (
     <div className="booking-form">
-      <h2>Book a Service</h2>
+      <h2>Book {service.name} Service</h2>
       <form onSubmit={handleSubmit}>
         {/* <div className="form-group">
           <label htmlFor="user">User:</label>
@@ -135,10 +137,10 @@ const handleAddBooking = async (formData) => {
         </div> */}
         <div>
             {/* <h3>{service._id}</h3> */}
-            <h4>{service.name}</h4>
+            {/* <h4>{service.name}</h4>
             <h4>{service.description}</h4>
             <h4>{service.duration}</h4>
-            <h4>{service.price}</h4>
+            <h4>{service.price}</h4> */}
         </div>
 
         <div className="form-group">
@@ -179,7 +181,7 @@ const handleAddBooking = async (formData) => {
           </select>
         </div> */}
 
-        <button type="submit">Submit Booking</button>
+        <button type="submit">Submit Booking for {service.name}</button>
       </form>
     </div>
   );

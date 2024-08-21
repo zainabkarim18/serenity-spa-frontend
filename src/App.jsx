@@ -49,7 +49,7 @@ const App = () => {
         <Routes>
           <Route path="/services" element={<ServiceList />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
-          <Route path="/services/add" element={<ServiceEditForm />} />
+          <Route path="/services/edit" element={<ServiceEditForm />} />
           <Route path="/services/new" element={<ServiceForm />} />
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />

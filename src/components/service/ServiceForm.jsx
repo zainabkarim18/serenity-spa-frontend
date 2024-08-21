@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ServiceForm = ({ onFormSubmit }) => {
     const navigate = useNavigate();
+     const [services,newServices] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
         duration: '',

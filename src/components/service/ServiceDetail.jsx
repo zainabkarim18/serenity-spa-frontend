@@ -16,14 +16,16 @@ const ServiceDetail = (props) => {
   useEffect(() => {
     const fetchServiceDetail = async () => {
       try {
-        const serviceData = await serviceService.detail(id);
+        const serviceData = await serviceService.detail(props.id);
+        console.log("service id:",props.id);
+        
         setService(serviceData);
       } catch (error) {
         console.error("Error fetching service details:", error);
       }
     };
     fetchServiceDetail();
-        const user = authService.getUser();
+    const user = authService.getUser();
     setCurrentUser(user);
     if(currentUser)
     console.log("user",currentUser);
@@ -31,7 +33,7 @@ const ServiceDetail = (props) => {
 
   const handleDelete = async () => {
     try {
-      await serviceService.remove(id);
+      await serviceService.remove(props.id);
       navigate("/services");
     } catch (error) {
       console.error("Error deleting service:", error);
@@ -44,24 +46,21 @@ const ServiceDetail = (props) => {
 
   return (
     <div>
-
-      <img src={props.image} alt={props.name} />
-      <h1>Name: {props.name}</h1>
-      <h2>Description: {props.description}</h2>
-      <h2>Duration: {props.duration}</h2>
-      <h2>
-        Price: {props.price}
-        {props.price > 1 ? "BD" : ""}
-      </h2> 
-      <button  onClick={()=>editService()}>Edit Service</button>
-      <button  onClick={() => props.handleDeleteService(props._id)}> Delete Service</button>
+      <h1>{service.name}</h1>
+      <p>Description: {service.description}</p>
+      <p>Duration: {service.duration}</p>
+      <p>Price: {service.price}</p>
+      {service.image && (
+        <p>
+          Image: <img src={service.image} alt={service.name} />
+        </p>
+      )}
+      <Link to={`/services/edit`}>
+        <button>Edit Service</button>
+      </Link>
+      <button onClick={handleDelete}>Delete Service</button>
       <button onClick={()=> setIsBooking(!isBooking)}>BOOK</button>
       { currentUser && isBooking && <BookingForm userId={currentUser.id} serviceId={props._id} />}
-    
-
-
-      
-      <Reviews serviceId={props._id} /> 
     </div>
   );
 };

@@ -1,6 +1,5 @@
-
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
 import * as serviceService from "../../services/serviceService";
 import ServiceEditForm from '../service/ServiceEditForm';
 import ServiceDetail from '../service/ServiceDetail';
@@ -8,25 +7,19 @@ import ServiceForm from './ServiceForm';
 const ServiceList = () => {
   const [serviceList, setServiceList] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-    const [isAdd,setIsAdd] = useState(false);
   const [servicetoEdit, setServiceToEdit] = useState({});
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate(); // Add useNavigate hook
 
-   const changeEdit=()=>{
-        setIsEdit(!isEdit)
-        if(isEdit==true){
-            setIsAdd(false)
-        }else{
-            setIsAdd(true)
-        }
-    }
+  const changeEdit = () => {
+    setIsEdit(!isEdit);
+  };
 
   const fetchServices = async () => {
     try {
       const services = await serviceService.index();
-      if (services.error) {
-        throw new Error(services.error);
+      if (!services) {
+        throw new Error(services);
 // =======
 //   const [services, setServices] = useState([]);
 
@@ -72,12 +65,11 @@ const ServiceList = () => {
     </li>
   ));
 
-    
-    return (
-        <div>
-              {showForm && <ServiceForm onFormSubmit={handleFormSubmit} />}
+  return (
+    <div>
+      {showForm && <ServiceForm onFormSubmit={handleFormSubmit} />}
       <Link to="/services/new">
-        <button>Create New Service</button>
+        <button>Add Service</button>
       </Link>
       <div>
         {isEdit && servicetoEdit ? (
@@ -106,7 +98,7 @@ const ServiceList = () => {
 //             </Link>
 //           </li>
 //         ))}
-//       </ul>
+    //   </ul>
 // >>>>>>> main
     // </div>
   );
