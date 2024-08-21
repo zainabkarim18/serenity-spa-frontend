@@ -4,7 +4,6 @@ const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/services`;
 const update = async (formData) => {
     console.log("data", formData);
 
-    //    const unfData = JSON.stringify(formData);
     try {
         await fetch(`${BASE_URL}/`, {
             method: 'PUT',
@@ -14,7 +13,6 @@ const update = async (formData) => {
             },
             body: JSON.stringify(formData)
         });
-        // console.log(id);
 
         const res = await fetch(`${BASE_URL}/`);
 
