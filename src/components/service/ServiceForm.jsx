@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as serviceService from '../../services/serviceService';
 
-
-const ServiceForm = ({ setService, service}) => {
+const ServiceForm = () => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [formData, setFormData] = useState({
     name: '',
@@ -10,6 +10,10 @@ const ServiceForm = ({ setService, service}) => {
     description: '',
     price: ''
   });
+
+  const [services,newServices] = useState([]);
+
+ const navigate = useNavigate();
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -20,15 +24,37 @@ const ServiceForm = ({ setService, service}) => {
   const handleAddService = async (formData) => {
     try {
       const newService = await serviceService.create(formData);
-      if (newService.error) {
-        throw new Error(newService.error);
+      if (!newService) {
+        throw new Error(newService);
       }
-      setService([newService, ...service]);
+      console.log(newService);
+      newServices([services, ...newService]);
+      // console.log("services",services);
+      setFormData({    name: '',
+    duration: '',
+    description: '',
+    price: ''})
       setIsFormOpen(false);
     } catch (err) {
       console.log(err);
     }
   };
+
+// const handleUpdateService = async (formData) => {
+//     try {
+//       const updatedService = await serviceService.update(formData, id);
+//       if (!updatedService.error) {
+//         throw new Error(updatedService);
+//       };
+//       const updatedServices = services.map((res) => (
+//         res._id !== updatedService._id ? res: updatedService
+//       ));
+//       newServices(updatedServices);
+//     } catch (error) {
+//       console.log(error);
+//     };
+//   };
+
 
    const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -77,7 +103,7 @@ const ServiceForm = ({ setService, service}) => {
           onChange={handleChange}
         />
     
-        <button type="submit">Add Service</button>
+        <button type="submit" onClick={() => setIsFormOpen(false)}>Add Service</button>
       </form>
     </main>
   );
