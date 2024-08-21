@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import authService from '../../services/authService';
 
 const ProfileDetail = () => {
@@ -9,12 +10,10 @@ const ProfileDetail = () => {
       const loggedInUser = authService.getUser();
       if (loggedInUser) {
         setUser(loggedInUser);
-      } else {
-        
       }
     };
     fetchUser();
-  }, []);
+  }, []); // Re-fetch on mount
 
   if (!user) {
     return <div>Loading...</div>;
@@ -25,7 +24,9 @@ const ProfileDetail = () => {
       <h1>Username: {user.username}</h1>
       <h2>Email: {user.email}</h2>
       <h2>Role: {user.role}</h2>
-      {/* Add more user details as needed */}
+      <Link to="/edit-profile">
+        <button>Edit</button>
+      </Link>
     </div>
   );
 };
