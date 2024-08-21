@@ -8,10 +8,16 @@ import ServiceForm from './ServiceForm';
 const ServiceList = () => {
     const [serviceList, setServiceList] = useState([]);
     const [isEdit,setIsEdit] = useState(false);
+    const [isAdd,setIsAdd] = useState(false);
     const [servicetoEdit,setServiceToEdit]= useState({})
     
     const changeEdit=()=>{
         setIsEdit(!isEdit)
+        if(isEdit==true){
+            setIsAdd(false)
+        }else{
+            setIsAdd(true)
+        }
     }
    
     useEffect(() => {
@@ -29,6 +35,7 @@ const ServiceList = () => {
         }
         };
         fetchServices();
+        
     }, []);
 
       const handleDeleteService = async (id) => {
@@ -45,7 +52,7 @@ const ServiceList = () => {
     ))
     return (
         <div>
-            <ServiceForm />
+            { !isEdit && <ServiceForm />}
              <div>
             {isEdit && servicetoEdit ? 
             <ServiceEditForm setIsEdit={changeEdit} serviceID={servicetoEdit} /> :

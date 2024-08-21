@@ -13,6 +13,7 @@ import SigninForm from './components/auth/SignInForm';
 import BookingList from "./components/booking/BookingList"; 
 import BookingDetails from "./components/booking/BookingDetail";
 import Footer from './components/partials/Footer';
+import BookingForm from './components/booking/BookingForm';
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser());
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
           <Route path="/bookings" element={<BookingList />} />
           <Route path="/bookings/:id" element={<BookingDetails />} />
+          <Route path="/bookingform/:userId/:serviceId" element={<BookingForm />} />
         </Routes>
       </main>
 

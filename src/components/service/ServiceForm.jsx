@@ -30,17 +30,30 @@ const ServiceForm = () => {
       console.log(newService);
       newServices([services, ...newService]);
       // console.log("services",services);
-      setFormData({    name: '',
-    duration: '',
-    description: '',
-    price: ''})
+      
       setIsFormOpen(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleSubmit = async (evt) => {
+// const handleUpdateService = async (formData) => {
+//     try {
+//       const updatedService = await serviceService.update(formData, id);
+//       if (!updatedService.error) {
+//         throw new Error(updatedService);
+//       };
+//       const updatedServices = services.map((res) => (
+//         res._id !== updatedService._id ? res: updatedService
+//       ));
+//       newServices(updatedServices);
+//     } catch (error) {
+//       console.log(error);
+//     };
+//   };
+
+
+   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await handleAddService(formData);
   };
