@@ -4,7 +4,7 @@ import authService from './services/authService';
 
 // Components
 import ServiceList from "./components/service/ServiceList";
-// import ServiceDetail from "./components/service/ServiceDetail";
+import ServiceDetail from "./components/service/ServiceDetail";
 import ServiceEditForm from './components/service/ServiceEditForm';
 import ServiceForm from "./components/service/ServiceForm";
 import NavBar from "./components/partials/NavBar";
@@ -47,8 +47,10 @@ const App = () => {
       <main className={location.pathname === '/signup' || location.pathname === '/signin' ? 'form-page-wrapper' : 'main-content'}>
         <Routes>
           <Route path="/services" element={<ServiceList />} />
-          {/* <Route path="/services/:id" element={<ServiceDetail />} /> */}
+          <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/services/add" element={<ServiceEditForm />} />
+          <Route path="/services/new" element={<ServiceForm />} />
+
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
 

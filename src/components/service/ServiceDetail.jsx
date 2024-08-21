@@ -22,7 +22,7 @@ export default function ServiceDetail (props) {
       <button  onClick={() => props.handleDeleteService(props._id)}> Delete Service</button>
     
       
-      {/* <Reviews serviceId={props._id} />  */}
+      <Reviews serviceId={props._id} /> 
     </div>
   );
 };

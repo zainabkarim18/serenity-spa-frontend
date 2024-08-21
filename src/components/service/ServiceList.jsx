@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import * as serviceService from "../../services/serviceService";
 import ServiceEditForm from "../service/ServiceEditForm";
@@ -10,24 +10,25 @@ const ServiceList = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [servicetoEdit, setServiceToEdit] = useState({});
   const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate(); // Add useNavigate hook
 
   const changeEdit = () => {
     setIsEdit(!isEdit);
   };
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const services = await serviceService.index();
-        if (services.error) {
-          throw new Error(services.error);
-        }
-        setServiceList(services);
-        console.log(services);
-      } catch (err) {
-        console.log(err);
+  const fetchServices = async () => {
+    try {
+      const services = await serviceService.index();
+      if (services.error) {
+        throw new Error(services.error);
       }
-    };
+      setServiceList(services);
+      console.log(services);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
     fetchServices();
   }, []);
 
@@ -35,8 +36,11 @@ const ServiceList = () => {
     const deletedService = await serviceService.remove(id);
     setServiceList(serviceList.filter((ser) => ser._id !== deletedService._id));
   };
+
   const handleFormSubmit = () => {
     setShowForm(false);
+    fetchServices();
+    navigate("/services"); 
   };
 
   const services = serviceList.map((ser, index) => (
@@ -55,7 +59,9 @@ const ServiceList = () => {
   return (
     <div>
       {showForm && <ServiceForm onFormSubmit={handleFormSubmit} />}
-      <button onClick={() => setShowForm(!showForm)}>Create New Service</button>
+      <Link to="/services/new">
+        <button>Create New Service</button>
+      </Link>
       <div>
         {isEdit && servicetoEdit ? (
           <ServiceEditForm setIsEdit={changeEdit} serviceID={servicetoEdit} />
