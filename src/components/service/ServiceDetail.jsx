@@ -1,28 +1,35 @@
-import Reviews from "../review/reviewSection";
-export default function ServiceDetail (props) {
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import * as serviceService from "../../services/serviceService";
 
-  const editService =()=>{
-    props.setIsEdit();
-    props.setServiceToEdit(props._id)
-    }
+const ServiceDetail = () => {
+  const { id } = useParams();
+  const [service, setService] = useState(null);
 
-  
+  useEffect(() => {
+    const fetchServiceDetail = async () => {
+      try {
+        const serviceData = await serviceService.detail(id);
+        setService(serviceData);
+      } catch (error) {
+        console.error("Error fetching service details:", error);
+      }
+    };
+    fetchServiceDetail();
+  }, [id]);
+
+  if (!service) {
+    return <p>Loading service details...</p>;
+  }
 
   return (
     <div>
-      <img src={props.image} alt={props.name} />
-      <h1>{props.name}</h1>
-      <h2>Description: {props.description}</h2>
-      <h2>Duration: {props.duration}</h2>
-      <h2>
-        Price: {props.price}
-        {props.price > 1 ? "BD" : ""}
-      </h2> 
-      <button  onClick={()=>editService()}>Edit Service</button>
-      <button  onClick={() => props.handleDeleteService(props._id)}> Delete Service</button>
-    
-      
-      {/* <Reviews serviceId={props._id} />  */}
+      <h1>{service.name}</h1>
+      <p>Description: {service.description}</p>
+      <p>Duration: {service.duration}</p>
+      <p>Price: {service.price}</p>
     </div>
   );
 };
+
+export default ServiceDetail;
