@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import * as serviceService from '../../services/serviceService';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const ServiceForm = ({ onFormSubmit }) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         duration: '',
@@ -33,7 +34,7 @@ const ServiceForm = ({ onFormSubmit }) => {
                 price: '',
                 image: ''
             });
-
+navigate('/services');
             if (onFormSubmit) onFormSubmit();
         } catch (err) {
             console.log(err);

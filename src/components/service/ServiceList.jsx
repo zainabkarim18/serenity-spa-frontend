@@ -40,7 +40,6 @@ const ServiceList = () => {
   const handleFormSubmit = () => {
     setShowForm(false);
     fetchServices();
-    navigate("/services"); 
   };
 
   const services = serviceList.map((ser, index) => (
