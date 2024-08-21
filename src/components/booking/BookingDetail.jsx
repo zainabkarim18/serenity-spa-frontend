@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as bookingService from '../../services/bookingService';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 const BookingDetails = () => {
   const { id } = useParams();
@@ -12,6 +13,7 @@ const BookingDetails = () => {
       try {
         const bookingData = await bookingService.show(id);
         setBooking(bookingData);
+        console.log(bookingData);
       } catch (error) {
         console.error("Error fetching booking details:", error);
       }
@@ -32,13 +34,15 @@ const BookingDetails = () => {
   if (!booking) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>Booking Details</h1>
-      <p>Date: {new Date(booking.date).toLocaleDateString()}</p>
-      <p>Time: {booking.time}</p>
-      <p>Status: {booking.status}</p>
-
-      <button onClick={handleRemove}>Remove Booking</button>
+    <div className="container mt-4">
+      <h1 className="mb-4">Booking Details</h1>
+      <div className="card p-3">
+        <p><strong>Service:</strong> {booking.service.name}</p>
+        <p><strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}</p>
+        <p><strong>Time:</strong> {booking.time}</p>
+        <p><strong>Status:</strong> {booking.status}</p>
+      </div>
+      <button className="btn btn-danger mt-3" onClick={handleRemove}>Remove Booking</button>
     </div>
   );
 };
