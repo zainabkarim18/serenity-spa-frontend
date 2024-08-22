@@ -21,7 +21,7 @@ const BookingList = (props) => {
 
    const fetchBookings = async () => {
     
-       try {
+      try {
         const bookingData = await bookingService.index();
         setBookings(bookingData);
       } catch (error) {
@@ -48,7 +48,9 @@ const BookingList = (props) => {
         {bookings.map((booking) => (
           <li key={booking._id} className="list-group-item">
             <Link className='link' to={`/bookings/${booking._id}`}>
-               on {new Date(booking.date).toLocaleDateString()} at {booking.time}
+            {booking.service.name} on {new Date(booking.date).toLocaleDateString()} at {booking.time}
+              <p><strong>Service:</strong> {booking.service && booking.service.name}</p>
+            
             </Link>
           </li>
         ))}

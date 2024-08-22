@@ -37,7 +37,7 @@ const BookingDetails = () => {
     <div className="container mt-4">
       <h1 className="mb-4">Booking Details</h1>
       <div className="card p-3">
-        {/* <p><strong>Service:</strong> {booking.service.name}</p> */}
+        <p><strong>Service:</strong> {booking.service.name}</p>
         <p><strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}</p>
         <p><strong>Time:</strong> {booking.time}</p>
         <p><strong>Status:</strong> {booking.status}</p>

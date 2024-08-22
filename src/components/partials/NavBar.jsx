@@ -9,7 +9,7 @@ const NavBar = ({ user, handleSignout }) => {
         <li><Link to="/services">Services</Link></li>
         {user && (
           <>
-            <li><Link to="/bookings">All Bookings</Link></li>
+            <li><Link to="/bookings">Bookings</Link></li>
             <li><Link to="/profile">My Profile</Link></li>
           </>
         )}
