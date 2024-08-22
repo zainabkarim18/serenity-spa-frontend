@@ -28,33 +28,38 @@ const ProfileForm = ({ user, setUser }) => {
   };
 
   return (
-    <div>
-      <h1>Edit Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Update Profile</button>
-      </form>
-      {message && <p>{message}</p>}
-    </div>
+<div className="profile-form-container">
+  <div className="profile-form-card">
+    <h1 className="profile-form-title">Edit Profile</h1>
+    <form onSubmit={handleSubmit} className="profile-form">
+      <div className="form-group">
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          className="form-input"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="form-input"
+        />
+      </div>
+      <button type="submit" className="profile-submit-button">Update Profile</button>
+    </form>
+    {message && <p className="form-message">{message}</p>}
+  </div>
+</div>
+
   );
 };
 
