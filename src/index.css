@@ -359,12 +359,15 @@ label {
 }
 
 .cardservice img {
-  width: 100%;
-  height: auto;
+  width: 290px;
+  height: 290px;
   max-height: 200px; 
   object-fit: cover;
   border-radius: 10px;
+  align-items: center;
 }
+
+
 
 h5 {
   color: white;
@@ -426,7 +429,7 @@ h5 {
 
 
 @media (max-width: 768px) {
-  .card {
+  .cardservice {
     flex: 1 1 calc(50% - 30px);
   }
 
