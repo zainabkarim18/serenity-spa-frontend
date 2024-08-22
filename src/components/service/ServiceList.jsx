@@ -81,7 +81,7 @@ const ServiceList = () => {
   return (
     <div className="container">
       <h1 className="my-4">Service List</h1>
-      <Link to="/services/new" className="btn btn-primary mb-4">
+ <Link to="/services/new" className="btn btn-primary mb-4">
         Add Service
       </Link>
       <div className="row">

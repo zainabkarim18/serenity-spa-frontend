@@ -47,7 +47,7 @@ const App = () => {
 
       <main className={location.pathname === '/signup' || location.pathname === '/signin' ? 'form-page-wrapper' : 'main-content'}>
         <Routes>
-          <Route path="/services" element={<ServiceList />} />
+          <Route path="/services" element={<ServiceList/>} />
           <Route path="/services/:id" element={<ServiceDetail user={user} />} />
           <Route path="/services/:id/edit" element={<ServiceEditForm />} />
           <Route path="/services/new" element={<ServiceForm />} />

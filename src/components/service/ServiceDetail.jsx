@@ -69,7 +69,7 @@ const ServiceDetail = (props) => {
               <button onClick={handleDelete} className="btn btn-danger me-2">
                 Delete Service
               </button></div>:""}
-                {props.user ? <button onClick={()=> setIsBooking(!isBooking)} className="btn btn-danger me-2">
+                {(props.user && props.user.role!="admin")?<button onClick={()=> setIsBooking(!isBooking)} className="btn btn-danger me-2">
                 Book Service
               </button>:""}
             </div> 

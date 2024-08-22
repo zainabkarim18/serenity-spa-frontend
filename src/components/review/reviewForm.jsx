@@ -64,7 +64,7 @@ const ReviewForm = ({ handleAddReview, selectedReview, handleUpdateReview }) => 
         </select>
       </div>
 
-      <button type="submit" className="btn btn-primary">
+    <button type="submit" className="btn btn-primary" >
         {selectedReview ? 'Update Review' : 'Submit Review'}
       </button>
     </form>
