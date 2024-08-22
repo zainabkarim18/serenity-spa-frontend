@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as serviceService from '../../services/serviceService';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 const ServiceForm = ({ onFormSubmit }) => {
     const navigate = useNavigate();
+     const [services,newServices] = useState([]);
     const [formData, setFormData] = useState({
         name: '',
         duration: '',
@@ -18,33 +19,34 @@ const ServiceForm = ({ onFormSubmit }) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleAddService = async (formData) => {
-        try {
-            const newService = await serviceService.create(formData);
-            if (!newService) {
-                throw new Error(newService);
-            }
-            console.log(newService);
-
-            // Reset form data and call the onFormSubmit callback
-            setFormData({
+  const handleAddService = async (formData) => {
+    try {
+      const newService = await serviceService.create(formData);
+      if (!newService) {
+        throw new Error(newService);
+      }
+      console.log(newService);
+      newServices([services, ...newService]);
+      // console.log("services",services);
+   setFormData({
                 name: '',
                 duration: '',
                 description: '',
                 price: '',
                 image: ''
             });
-navigate('/services');
+
+            navigate('/services');
             if (onFormSubmit) onFormSubmit();
         } catch (err) {
             console.log(err);
         }
     };
 
-    const handleSubmit = async (evt) => {
-        evt.preventDefault();
-        await handleAddService(formData);
-    };
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    await handleAddService(formData);
+  };
 
     return (
         <main className="container mt-5">
@@ -64,18 +66,6 @@ navigate('/services');
                 </div>
 
                 <div className="col-md-6">
-                    <label htmlFor="description-input" className="form-label">Description</label>
-                    <textarea
-                        required
-                        name="description"
-                        id="description-input"
-                        className="form-control"
-                        value={formData.description}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="col-md-6">
                     <label htmlFor="duration-input" className="form-label">Duration</label>
                     <input
                         required
@@ -84,6 +74,19 @@ navigate('/services');
                         id="duration-input"
                         className="form-control"
                         value={formData.duration}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="col-md-12">
+                    <label htmlFor="description-input" className="form-label">Description</label>
+                    <textarea
+                        required
+                        name="description"
+                        id="description-input"
+                        className="form-control"
+                        rows="4"
+                        value={formData.description}
                         onChange={handleChange}
                     />
                 </div>
@@ -101,7 +104,7 @@ navigate('/services');
                     />
                 </div>
 
-                <div className="col-md-12">
+                <div className="col-md-6">
                     <label htmlFor="image" className="form-label">Image Path</label>
                     <input
                         required
@@ -115,7 +118,7 @@ navigate('/services');
                 </div>
 
                 <div className="col-12">
-                    <button type="submit" className="btn btn-primary">Add Service</button>
+                    <button type="submit" className="btn btn-primary w-100">Add Service</button>
                 </div>
             </form>
         </main>

@@ -16,6 +16,21 @@ const index = async () => {
   }
 };
 
+// const userIndex = async (userId) => {
+//   try {
+//     const res = await fetch(`BASE_URL/user/${userId}`, {
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       },
+//     });
+
+//     return res.json();
+//   } catch (error) {
+//     console.error("Error fetching bookings:", error);
+//     throw error;
+//   }
+// };
+
 const show = async (bookingId) => {
   try {
     const res = await fetch(`${BASE_URL}/${bookingId}`, {
@@ -23,6 +38,7 @@ const show = async (bookingId) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    console.log("res",res);
 
     return res.json();
   } catch (error) {
@@ -32,21 +48,49 @@ const show = async (bookingId) => {
 };
 
 const remove = async (bookingId) => {
-    try {
-      const options = {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-  
-      const res = await fetch(`${BASE_URL}/${bookingId}`, options);
-  
-      return res.json();
-    } catch (error) {
-      console.error("Error deleting booking:", error);
-      throw error;
-    }
-  };
-  
-export { index, show, remove};
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    const res = await fetch(`${BASE_URL}/${bookingId}`, options);
+
+    return res.json();
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    throw error;
+  }
+};
+
+const create = async (formData, userId, serviceId) => {
+  console.log("formdata", formData);
+  const data = JSON.stringify(formData)
+  // const userId = data.user;
+  // const serviceId = data.service; 
+  console.log("user:", userId, "service:", serviceId);
+
+  try {
+    const res = await fetch(`${BASE_URL}/${userId}/${serviceId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+    // console.log(options);
+
+    // const res = await fetch(`${BASE_URL}/${userId}/${serviceId}`)
+    console.log("res", res);
+
+    return res.json()
+  } catch (err) {
+    console.log("error in bookig service create", err)
+  }
+};
+
+
+export { index, show, remove, create };

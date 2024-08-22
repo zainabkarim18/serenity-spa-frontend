@@ -40,7 +40,7 @@ const BookingDetails = () => {
         <p><strong>Service:</strong> {booking.service.name}</p>
         <p><strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}</p>
         <p><strong>Time:</strong> {booking.time}</p>
-        <p><strong>Status:</strong> {booking.status}</p>
+        {/* <p><strong>Status:</strong> {booking.status}</p> */}
       </div>
       <button className="btn btn-danger mt-3" onClick={handleRemove}>Remove Booking</button>
     </div>
