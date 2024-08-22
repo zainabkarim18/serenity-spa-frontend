@@ -21,8 +21,8 @@ const ServiceList = () => {
       </div>
       <div className="box">
         {services.map((service) => (
-          <div className="card" key={service._id}>
-            <br />
+          <div className="cardservice" key={service._id}>
+            
             <img src={service.image} alt={service.name} /><br /><br />
             <h5>{service.name}</h5><br />
             <div className="pra">
