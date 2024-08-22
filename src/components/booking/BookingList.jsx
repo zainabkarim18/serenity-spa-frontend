@@ -22,7 +22,7 @@ const BookingList = (props) => {
    const fetchBookings = async () => {
     
        try {
-        const bookingData = await bookingService.index(currentUser.id);
+        const bookingData = await bookingService.index();
         setBookings(bookingData);
       } catch (error) {
         console.error("Error fetching bookings:", error);
@@ -40,19 +40,15 @@ const BookingList = (props) => {
   // }
   if (!bookings.length) return <p>No bookings found.</p>;
 
-
+  
   return (
     <div className="container mt-4">
-      {/* {(props.user && props.user.role =="admin") ? <h2 className="mb-4">All Bookings</h2>:<h2 className="mb-4">Your Bookings</h2>} */}
+      {(props.user && props.user.role =="admin") ? <h2 className="mb-4">All Bookings</h2>:<h2 className="mb-4">Your Bookings</h2>}
       <ul className="list-group">
-        <h2 className="mb-4">Your Bookings</h2>
-        
         {bookings.map((booking) => (
           <li key={booking._id} className="list-group-item">
             <Link className='link' to={`/bookings/${booking._id}`}>
-
-            
-              {/* {booking.service.name} on {new Date(booking.date).toLocaleDateString()} at {booking.time} */}
+               on {new Date(booking.date).toLocaleDateString()} at {booking.time}
             </Link>
           </li>
         ))}

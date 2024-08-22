@@ -90,20 +90,7 @@ const handleAddBooking = async (formData,userId,serviceId) => {
     // console.log(props.user.id);
     await handleAddBooking(formData,props.userId,props.serviceId);
     props.setIsBooking(false);
-    // try {
-    //   await axios.post('/api/bookings', formData);
-    //   alert('Booking successfully created!');
-    //   setFormData({
-    //     user: '',
-    //     service: '',
-    //     date: '',
-    //     time: '',
-    //     status: 'Pending',
-    //   });
-    // } catch (error) {
-    //   console.error('Error submitting form:', error);
-    //   alert('Failed to create booking.');
-    // }
+    
   };
 
   return (

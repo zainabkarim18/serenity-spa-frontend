@@ -38,6 +38,7 @@ const show = async (bookingId) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    console.log("res",res);
 
     return res.json();
   } catch (error) {
