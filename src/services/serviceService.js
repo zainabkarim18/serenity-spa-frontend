@@ -14,13 +14,12 @@ const update = async (formData) => {
             body: JSON.stringify(formData)
         });
 
-        const res = await fetch(`${BASE_URL}/`);
-
-        return res.json()
     } catch (err) {
-        console.log(err)
+        console.error("Error updating service:", err);
+        return { error: err.message };
     }
 };
+
 
 // INDEX - SHOW LIST
 const index = async () => {

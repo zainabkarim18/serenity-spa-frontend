@@ -16,6 +16,21 @@ const index = async () => {
   }
 };
 
+// const userIndex = async (userId) => {
+//   try {
+//     const res = await fetch(`BASE_URL/user/${userId}`, {
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       },
+//     });
+
+//     return res.json();
+//   } catch (error) {
+//     console.error("Error fetching bookings:", error);
+//     throw error;
+//   }
+// };
+
 const show = async (bookingId) => {
   try {
     const res = await fetch(`${BASE_URL}/${bookingId}`, {
@@ -32,32 +47,32 @@ const show = async (bookingId) => {
 };
 
 const remove = async (bookingId) => {
-    try {
-      const options = {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-  
-      const res = await fetch(`${BASE_URL}/${bookingId}`, options);
-  
-      return res.json();
-    } catch (error) {
-      console.error("Error deleting booking:", error);
-      throw error;
-    }
-  };
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
 
-const create = async (formData) =>{
+    const res = await fetch(`${BASE_URL}/${bookingId}`, options);
+
+    return res.json();
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    throw error;
+  }
+};
+
+const create = async (formData, userId, serviceId) => {
   console.log("formdata", formData);
   const data = JSON.stringify(formData)
-  const userId = data.user;
-  const serviceId = data.service; 
-  console.log("user:",userId,"service:",serviceId);
-  
+  // const userId = data.user;
+  // const serviceId = data.service; 
+  console.log("user:", userId, "service:", serviceId);
+
   try {
-    await fetch(`${BASE_URL}/`, {
+    const res = await fetch(`${BASE_URL}/${userId}/${serviceId}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -68,13 +83,13 @@ const create = async (formData) =>{
     // console.log(options);
 
     // const res = await fetch(`${BASE_URL}/${userId}/${serviceId}`)
-    // console.log("res", res);
+    console.log("res", res);
 
-    // return res.json()
+    return res.json()
   } catch (err) {
-    console.log("error in bookig service create",err)
+    console.log("error in bookig service create", err)
   }
 };
 
 
-export { index, show, remove, create};
+export { index, show, remove, create };

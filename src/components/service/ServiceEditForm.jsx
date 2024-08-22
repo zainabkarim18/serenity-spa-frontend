@@ -1,94 +1,109 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as serviceService from '../../services/serviceService';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ServiceEditForm = (props) => {
-    const [isFormOpen, setIsFormOpen] = useState(false);
-    const [serviceEditing, setServiceEditing]= useState({})
+const ServiceEditForm = () => {
+  const { id } = useParams();
+  const [serviceEditing, setServiceEditing] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    async function getService() {
-      console.log(props.serviceID);
-      const serviceData = await serviceService.detail(props.serviceID);
-      setServiceEditing(serviceData);
-      console.log(serviceData);
-      
-    }
-    getService();
-  }, []);
-
- const navigate = useNavigate();
+    const fetchService = async () => {
+      try {
+        const serviceData = await serviceService.detail(id);
+        setServiceEditing(serviceData);
+      } catch (error) {
+        console.error("Error fetching service details:", error);
+      }
+    };
+    fetchService();
+  }, [id]);
 
   const handleChange = (evt) => {
     setServiceEditing({ ...serviceEditing, [evt.target.name]: evt.target.value });
   };
 
-
-
-const handleUpdateService = async (formData) => {
-    try {
-      console.log("formData:",formData);
-      
-      const updatedService = await serviceService.update(formData);
-      if (!updatedService) {
-        throw new Error(updatedService);
-      };
-  
-      props.setIsEdit();
-    } catch (error) {
-      console.log(error);
-    };
-  };
-
-
-   const handleSubmit = async (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await handleUpdateService(serviceEditing);
+    try {
+      await serviceService.update(serviceEditing);
+      navigate(`/services/${id}`);
+    } catch (error) {
+      console.error("Error updating service:", error);
+    }
   };
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name-input">Service Name</label>
-        <input
-          required
-          type="text"
-          name="name"
-          id="name-input"
-          value={serviceEditing.name}
-          onChange={handleChange}
-        />
-        
-        <label htmlFor="description-input">Description</label>
-        <textarea
-          required
-          name="description"
-          id="description-input"
-          value={serviceEditing.description}
-          onChange={handleChange}
-        />
-        
-        <label htmlFor="duration-input">Duration</label>
-        <input
-          required
-          type="text"
-          name="duration"
-          id="duration-input"
-          value={serviceEditing.duration}
-          onChange={handleChange}
-        />
-        
-        <label htmlFor="price-input">Price</label>
-        <input
-          required
-          type="text"
-          name="price"
-          id="price-input"
-          value={serviceEditing.price}
-          onChange={handleChange}
-        />
-      <input type='hidden' value={serviceEditing._id} name='id'></input>
-        <button type="submit" onClick={() => setIsFormOpen(false)}>Edit {serviceEditing.name} Service</button>
+    <main className="container my-5">
+      <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-light">
+        <h2 className="mb-4">Edit {serviceEditing.name} Service</h2>
+
+        <div className="mb-3">
+          <label htmlFor="name-input" className="form-label">Service Name</label>
+          <input
+            required
+            type="text"
+            name="name"
+            id="name-input"
+            className="form-control"
+            value={serviceEditing.name || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="description-input" className="form-label">Description</label>
+          <textarea
+            required
+            name="description"
+            id="description-input"
+            className="form-control"
+            rows="4"
+            value={serviceEditing.description || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="duration-input" className="form-label">Duration</label>
+          <input
+            required
+            type="text"
+            name="duration"
+            id="duration-input"
+            className="form-control"
+            value={serviceEditing.duration || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="price-input" className="form-label">Price</label>
+          <input
+            required
+            type="text"
+            name="price"
+            id="price-input"
+            className="form-control"
+            value={serviceEditing.price || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="image-input" className="form-label">Image URL</label>
+          <input
+            type="text"
+            name="image"
+            id="image-input"
+            className="form-control"
+            value={serviceEditing.image || ''}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary w-100">Update Service</button>
       </form>
     </main>
   );

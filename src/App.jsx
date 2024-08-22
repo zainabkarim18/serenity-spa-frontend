@@ -48,16 +48,17 @@ const App = () => {
       <main className={location.pathname === '/signup' || location.pathname === '/signin' ? 'form-page-wrapper' : 'main-content'}>
         <Routes>
           <Route path="/services" element={<ServiceList />} />
-          <Route path="/services/:id" element={<ServiceDetail />} />
-          <Route path="/services/edit" element={<ServiceEditForm />} />
+          <Route path="/services/:id" element={<ServiceDetail user={user} />} />
+          <Route path="/services/:id/edit" element={<ServiceEditForm />} />
           <Route path="/services/new" element={<ServiceForm />} />
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />
           <Route path="/signin" element={<SigninForm setUser={setUser} />} />
           <Route path="/profile" element={<ProfileDetail />} />
           <Route path="/edit-profile" element={<ProfileForm user={user} setUser={setUser} />} />
-          <Route path="/bookings" element={<BookingList />} />
-          <Route path="/bookings/:id" element={<BookingDetails />} />
-          <Route path="/bookingform/:userId/:serviceId" element={<BookingForm />} />
+          <Route path="/bookings" element={<BookingList user={user}/>} />
+          {/* <Route path="/bookings/user/:userId" element={<BookingList user={user}/>} /> */}
+          <Route path="/bookings/:id" element={<BookingDetails  />} />
+          <Route path="/bookingform/:userId/:serviceId" element={<BookingForm user={user}/>} />
         </Routes>
       </main>
 

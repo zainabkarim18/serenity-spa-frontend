@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const ReviewForm = ({ handleAddReview, selectedReview, handleUpdateReview }) => {
   const [formData, setFormData] = useState({
     comment: '',
@@ -32,26 +34,37 @@ const ReviewForm = ({ handleAddReview, selectedReview, handleUpdateReview }) => 
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="comment">Comment:</label>
-      <textarea
-        id="comment"
-        name="comment"
-        value={formData.comment}
-        onChange={handleChange}
-        required
-      />
+    <form onSubmit={handleSubmit} className="mb-4">
+      <div className="mb-3">
+        <label htmlFor="comment" className="form-label">Comment:</label>
+        <textarea
+          id="comment"
+          name="comment"
+          className="form-control"
+          value={formData.comment}
+          onChange={handleChange}
+          required
+        />
+      </div>
 
-      <label htmlFor="rating">Rating:</label>
-      <select id="rating" name="rating" value={formData.rating} onChange={handleChange}>
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        <option value={3}>3</option>
-        <option value={4}>4</option>
-        <option value={5}>5</option>
-      </select>
+      <div className="mb-3">
+        <label htmlFor="rating" className="form-label">Rating:</label>
+        <select
+          id="rating"
+          name="rating"
+          className="form-select"
+          value={formData.rating}
+          onChange={handleChange}
+        >
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+        </select>
+      </div>
 
-      <button type="submit">
+      <button type="submit" className="btn btn-primary">
         {selectedReview ? 'Update Review' : 'Submit Review'}
       </button>
     </form>

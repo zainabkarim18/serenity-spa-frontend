@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import * as serviceService from '../../services/serviceService';
 import * as serviceBooking from '../../services/bookingService';
+import { useParams } from 'react-router-dom';
 
-const BookingForm = ({userId,serviceId}) => {
+const BookingForm = (props) => {
+const {serviceId} = useParams()
   const [service, setService] = useState([]);
   const [formData, setFormData] = useState({
     user: '',
@@ -12,13 +14,15 @@ const BookingForm = ({userId,serviceId}) => {
     status: 'Pending', // Default status
   });
 
-   const [booking,newBooking] = useState([]);
 
     // const [serviceList, setServiceList] = useState([]);
         useEffect(() => {
+            console.log("user",props.userId);
+            console.log("service",props.serviceId);
+            
         const fetchService = async () => {
             try {
-            const service = await serviceService.detail(serviceId);
+            const service = await serviceService.detail(props.serviceId);
             if (service.error) {  
                 throw new Error(service.error);
             }
@@ -33,17 +37,21 @@ const BookingForm = ({userId,serviceId}) => {
 
     }, []);
 
-const handleAddBooking = async (formData) => {
+const handleAddBooking = async (formData,userId,serviceId) => {
+    console.log("entered");
+    console.log("handle add booking",userId);
+    console.log("handle add booking",serviceId);
+    
     try {
-      const newBooking = await serviceBooking.create(formData);
+      const newBooking = await serviceBooking.create(formData,userId,serviceId);
       if (!newBooking) {
         throw new Error(newBooking);
       }
       console.log(newBooking);
-      newBooking([booking, ...newBooking]);
+    //   newBooking([booking, ...newBooking]);
       // console.log("services",services);
       
-      setIsFormOpen(false);
+    //   setIsFormOpen(false);
     } catch (err) {
       console.log("error in booking form",err);
     }
@@ -75,11 +83,13 @@ const handleAddBooking = async (formData) => {
 
 
   const handleSubmit = async (evt) => {
-    e.preventDefault();
-    setFormData({ ...formData, user: userId });
-    setFormData({ ...formData, service: serviceId });
-    await handleAddBooking(formData);
+    evt.preventDefault();
+    console.log(formData);
+    // console.log(serviceId);
     
+    // console.log(props.user.id);
+    await handleAddBooking(formData,props.userId,props.serviceId);
+    props.setIsBooking(false);
     // try {
     //   await axios.post('/api/bookings', formData);
     //   alert('Booking successfully created!');
