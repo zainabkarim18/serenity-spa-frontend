@@ -20,14 +20,35 @@ const ProfileDetail = () => {
   }
 
   return (
-    <div>
-      <h1>Username: {user.username}</h1>
-      <h2>Email: {user.email}</h2>
-      <h2>Role: {user.role}</h2>
-      <Link to="/edit-profile">
-        <button>Edit</button>
-      </Link>
+    <div className="profile-container">
+    <div className="profile-card">
+      <div className="profile-header">
+        <h1 className="profile-title">Profile</h1>
+        <div className="profile-icon">
+          
+        </div>
+      </div>
+      <div className="profile-info">
+        <div className="profile-section">
+          <h2 className="profile-label">Username:</h2>
+          <p className="profile-value">{user.username}</p>
+        </div>
+        <div className="profile-section">
+          <h2 className="profile-label">Email:</h2>
+          <p className="profile-value">{user.email}</p>
+        </div>
+        <div className="profile-section">
+          <h2 className="profile-label">Role:</h2>
+          <p className="profile-value">{user.role}</p>
+        </div>
+        <Link to="/edit-profile">
+          <button className="profile-edit-button">Edit Profile</button>
+        </Link>
+      </div>
     </div>
+  </div>
+  
+
   );
 };
 
