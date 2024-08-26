@@ -25,9 +25,7 @@ const ServiceForm = ({ onFormSubmit }) => {
       if (!newService) {
         throw new Error(newService);
       }
-      console.log(newService);
       newServices([services, ...newService]);
-      // console.log("services",services);
    setFormData({
                 name: '',
                 duration: '',

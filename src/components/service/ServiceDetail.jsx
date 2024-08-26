@@ -15,13 +15,9 @@ const ServiceDetail = (props) => {
   
 
   useEffect(() => {
-    console.log("user in details:",props.user);
-    
     const fetchServiceDetail = async () => {
       try {
-        const serviceData = await serviceService.detail(id);
-        console.log("service id:",id);
-        
+        const serviceData = await serviceService.detail(id); 
         setService(serviceData);
       } catch (error) {
         console.error("Error fetching service details:", error);
@@ -30,8 +26,8 @@ const ServiceDetail = (props) => {
     fetchServiceDetail();
     const user = authService.getUser();
     setCurrentUser(props.user);
-    if(currentUser)
-      console.log("currentUser",currentUser);
+    // if(currentUser)
+    //   console.log("currentUser",currentUser);
       
   }, [id]);
 

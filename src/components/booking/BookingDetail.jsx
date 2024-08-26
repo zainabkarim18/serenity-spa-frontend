@@ -13,7 +13,6 @@ const BookingDetails = () => {
       try {
         const bookingData = await bookingService.show(id);
         setBooking(bookingData);
-        console.log(bookingData);
       } catch (error) {
         console.error("Error fetching booking details:", error);
       }

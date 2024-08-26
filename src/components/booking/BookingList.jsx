@@ -5,21 +5,16 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import authService from "../../services/authService";
 
 const BookingList = (props) => {
-  const {userId} = useParams()
   const [bookings, setBookings] = useState([]);
-  const [showBookingForm, setshowBookingForm] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [selectedReview, setSelectedReview] = useState(null);
 
   useEffect(() => {
-    console.log("user",props.user);
-    
     fetchBookings();
     const user = authService.getUser();
     setCurrentUser(user);
   }, []);
 
-   const fetchBookings = async () => {
+  const fetchBookings = async () => {
     
       try {
         const bookingData = await bookingService.index();
@@ -30,14 +25,6 @@ const BookingList = (props) => {
 
     };
 
-  // const addBooking = async (booking)=>{
-  //   try {
-  //     const createBooking = await bookingService.create(booking);
-  //     fetchBookings();
-  //   } catch (error) {
-  //       console.log("Error creating booking:", error);
-  //   }
-  // }
   if (!bookings.length) return <p>No bookings found.</p>;
 
   
@@ -47,7 +34,7 @@ const BookingList = (props) => {
       <ul className="list-group">
         {bookings.map((booking) => (
           <li key={booking._id} className="list-group-item">
-{  booking.service &&          <Link className='link' to={`/bookings/${booking._id}`}>
+{  booking.service && <Link className='link' to={`/bookings/${booking._id}`}>
              on {new Date(booking.date).toLocaleDateString()} at {booking.time}
               <p><strong>Service:</strong> {booking.service && booking.service.name}</p>
             

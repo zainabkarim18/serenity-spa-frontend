@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const BookingForm = (props) => {
-  const { serviceId } = useParams();
   const [service, setService] = useState({});
   const [formData, setFormData] = useState({
     user: '',
@@ -36,7 +35,7 @@ const BookingForm = (props) => {
       if (!newBooking) {
         throw new Error(newBooking);
       }
-      console.log(newBooking);
+
     } catch (err) {
       console.error("Error in booking form", err);
     }
